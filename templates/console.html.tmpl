@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!--
+    HTML Head Tags
+    Docs: https://github.com/joshbuchea/HEAD
+  -->
+
+  <!-- Rendering Info -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--
+    Security Headers
+    Docs: https://infosec.mozilla.org/guidelines/web_security
+    Content Security Policy
+    Docs: https://infosec.mozilla.org/guidelines/web_security#content-security-policy
+    Generator: https://report-uri.com/home/generate
+    Evaluator: https://csp-evaluator.withgoogle.com/
+  -->
+  <meta http-equiv="Content-Security-Policy" content="
+  default-src 'none';
+  style-src 'self';
+  img-src 'self';
+  font-src 'self';
+  manifest-src 'self';
+  upgrade-insecure-requests;
+  block-all-mixed-content;
+  require-trusted-types-for 'script';">
+
+  <!--
+    Strict Transport Security
+    Docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+    Docs: https://infosec.mozilla.org/guidelines/web_security#http-strict-transport-security
+  -->
+  <meta http-equiv="Strict-Transport-Security" content="
+  max-age=63072000;
+  includeSubDomains;
+  preload;">
+
+  <!--
+    X-XSS-Protection
+    Docs: https://infosec.mozilla.org/guidelines/web_security#x-xss-protection
+  -->
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+
+  <!--
+    X-Content-Type-Options
+    Docs: https://infosec.mozilla.org/guidelines/web_security#x-content-type-options
+  -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+  <!-- Metadata -->
+  <meta name="referrer" content="no-referrer">
+
+  <!-- Titles -->
+  <title>Terraform Console</title>
+  <meta name="description" content="Terraform Console In The Browser">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="static/console.css">
+</head>
+
+<body>
+  <div class="main">
+
+    <div class="title">
+      <h1>TERRAFORM CONSOLE</h1>
+    </div>
+
+    <div class="console">
+      {{ .Line }}
+      <form action="/" method="POST">
+        <input type="text" id="input" name="input" class="input"><br>
+      </form>
+    </div>
+
+    <div class="footer">
+      <h3>Made by me.</h3>
+    </div>
+  </div>
+</body>
+
+</html>
