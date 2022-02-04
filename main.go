@@ -11,38 +11,44 @@ import (
 	"strings"
 )
 
-type d struct {
-	Data string
+// app stores shared information for the service like cached templates.
+type app struct {
+	templates *template.Template
 }
 
-func (d *d) handler(w http.ResponseWriter, r *http.Request) {
-	body := r.FormValue("eval")
-	d.Data = evalCombined(body)
-
-	t, err := template.ParseFiles("templates/root.html.tmpl")
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = t.Execute(w, d)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
+// main starts the application.
 func main() {
-	d := d{Data: ""}
-	http.HandleFunc("/", d.handler)
+	app := &app{
+		templates: template.Must(template.ParseGlob("./templates/*")),
+	}
+
+	fs := http.FileServer(http.Dir("static/"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
+	http.HandleFunc("/", app.handlerConsole)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
-func evalCombined(line string) string {
-	sOut, sErr, _ := eval(line)
+// handlerConsole renders the console and handles new requests.
+func (a *app) handlerConsole(w http.ResponseWriter, r *http.Request) {
+	input := r.FormValue("input")
+
+	err := a.templates.ExecuteTemplate(w, "console.html.tmpl", struct{ Line string }{Line: consoleCombined(input)})
+	if err != nil {
+		http.Error(w, "ERROR: failed to render template", http.StatusInternalServerError)
+		log.Println("ERROR: failed to render console template:", err)
+	}
+}
+
+// consoleCombined runs console() and combines stdout and stderr.
+func consoleCombined(line string) string {
+	sOut, sErr, _ := console(line)
 	return fmt.Sprintf("%s%s", sOut, sErr)
 }
 
-// eval takes a line and runs it through terraform console.
+// console takes a line and runs it through terraform console.
 // returns stdin, stderr, and the exit code.
-func eval(line string) (string, string, int) {
+func console(line string) (string, string, int) {
 	var code int
 	var sOut, sErr bytes.Buffer
 

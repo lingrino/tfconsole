@@ -16,6 +16,8 @@ FROM scratch
 
 COPY --from=builder /bin/terraform /bin/
 COPY --from=builder /bin/tfconsole /bin/
+
+COPY --from=builder /go/src/github.com/lingrino/tfconsole/static    /static
 COPY --from=builder /go/src/github.com/lingrino/tfconsole/templates /templates
 
 ENTRYPOINT ["tfconsole"]
