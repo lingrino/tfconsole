@@ -8,7 +8,7 @@ COPY . .
 RUN CGO_ENABLED=0 go build -o /bin/tfconsole
 
 # install terraform
-RUN wget https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip && \
+RUN wget -q https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip && \
     unzip terraform_${TF_VERSION}_linux_amd64.zip && rm terraform_${TF_VERSION}_linux_amd64.zip && \
     mv terraform /bin/terraform
 

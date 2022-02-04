@@ -1,0 +1,14 @@
+# Binaries
+dist/
+*.test
+
+# Coverage
+*.out
+coverage.txt
+
+# Benchmark
+bench.txt
+
+# IDE settings
+.idea/
+.vscode/

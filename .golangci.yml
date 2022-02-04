@@ -1,0 +1,61 @@
+linters:
+  enable:
+    - bodyclose
+    - deadcode
+    - depguard
+    - dogsled
+    - dupl
+    - errcheck
+    - errorlint
+    - exportloopref
+    - funlen
+    - gochecknoglobals
+    - gochecknoinits
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - gofmt
+    - goimports
+    - gomnd
+    - gomoddirectives
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - misspell
+    - nakedret
+    - nestif
+    - prealloc
+    - rowserrcheck
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - tparallel
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - whitespace
+    - wrapcheck
+
+linters-settings:
+  dupl:
+    threshold: 100
+  errcheck:
+    check-blank: true
+  gocognit:
+    min-complexity: 20
+  goconst:
+    min-occurrences: 3
+  gocyclo:
+    min-complexity: 10
+  nakedret:
+    max-func-lines: 0
+
+issues:
+  max-same-issues: 0 # unlimited
+  max-issues-per-linter: 0 # unlimited
