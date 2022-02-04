@@ -19,8 +19,14 @@ func (d *d) handler(w http.ResponseWriter, r *http.Request) {
 	body := r.FormValue("eval")
 	d.Data = evalCombined(body)
 
-	t, _ := template.ParseFiles("templates/root.html.tmpl")
-	t.Execute(w, d)
+	t, err := template.ParseFiles("templates/root.html.tmpl")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = t.Execute(w, d)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func main() {
