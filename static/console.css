@@ -18,15 +18,15 @@ body {
   border: 3px solid white;
 }
 
-.input {
-  width: 100%;
-  margin: 10px;
-}
-
 .console {
   margin-top: 50px;
   width: 100%;
   border: 3px solid white;
+}
+
+.forminput {
+  width: 100%;
+  margin: 10px;
 }
 
 .footer {

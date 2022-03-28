@@ -31,9 +31,20 @@ func main() {
 
 // handlerConsole renders the console and handles new requests.
 func (a *app) handlerConsole(w http.ResponseWriter, r *http.Request) {
-	input := r.FormValue("input")
+	id := r.FormValue("formid")
+	input := r.FormValue("forminput")
 
-	err := a.templates.ExecuteTemplate(w, "console.html.tmpl", struct{ Line string }{Line: consoleCombined(input)})
+	err := a.templates.ExecuteTemplate(w, "console.html.tmpl",
+		struct {
+			ID     string
+			Input  string
+			Output string
+		}{
+			ID:     id,
+			Input:  input,
+			Output: consoleCombined(input),
+		},
+	)
 	if err != nil {
 		http.Error(w, "ERROR: failed to render template", http.StatusInternalServerError)
 		log.Println("ERROR: failed to render console template:", err)
