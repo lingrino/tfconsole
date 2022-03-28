@@ -1,6 +1,7 @@
 FROM golang:1-alpine AS builder
 
-ARG TF_VERSION=1.1.5
+# https://github.com/hashicorp/terraform/releases
+ARG TF_VERSION=1.1.7
 
 # build tfconsole
 WORKDIR /go/src/github.com/lingrino/tfconsole
