@@ -3,6 +3,8 @@ FROM golang:1-alpine AS builder
 # https://github.com/hashicorp/terraform/releases
 ARG TF_VERSION=1.1.7
 
+RUN apk --update --no-cache add git
+
 # build tfconsole
 WORKDIR /go/src/github.com/lingrino/tfconsole
 COPY . .
