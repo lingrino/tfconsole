@@ -33,9 +33,24 @@ function addLine() {
     localStorage.setItem(historyKey, JSON.stringify(hist))
 }
 
+// get console history as a list of lines
+function getLines() {
+    hist = localStorage.getItem(historyKey) || "[]"
+    return JSON.parse(hist)
+}
+
 // populate the command history from local storage
 function fillHistory() {
-    document.getElementById("history").innerText = localStorage.getItem(historyKey)
+    let html
+    for (const line of getLines()) {
+        html += "<div id=\""+line[0]+"\" class=\"line\">> "+line[1]+"</br>"+line[2]+"</br></div>"
+    }
+
+    const escapeHTMLPolicy = trustedTypes.createPolicy("myEscapePolicy", {
+        createHTML: (string) => string // TODO actually filter the lines
+    });
+
+    document.getElementById("history").innerHTML = escapeHTMLPolicy.createHTML(html)
 }
 
 // things to do before the form is submitted
