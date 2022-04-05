@@ -64,26 +64,29 @@
   </head>
 
   <body id="body">
-    <div class="hidden" id="id">{{ .ID }}</div>
-    <div class="hidden" id="input">{{ .Input }}</div>
-    <div class="hidden" id="output">{{ .Output }}</div>
+
+    <div id="hidden" class="hidden">
+      <div id="id">{{ .ID }}</div>
+      <div id="input">{{ .Input }}</div>
+      <div id="output">{{ .Output }}</div>
+    </div>
 
     <div class="main">
 
-      <div class="title">
+      <div id="title" class="title">
         <h1>TERRAFORM CONSOLE</h1>
       </div>
 
-      <div class="console">
-        <div id="history"></div>
+      <div id="console" class="console">
+        <div id="history" class="history"></div>
         <form id="form" action="/" method="POST">
           <input type="hidden" id="formid" name="formid" value="">
           <input type="text" id="forminput" name="forminput" class="forminput" autofocus="autofocus"><br>
         </form>
-        <button id="clearHistory">Clear History</button>
+        <button id="clear" class="clear">Clear History</button>
       </div>
 
-      <div class="footer">
+      <div id="footer" class="footer">
         <h3>Made by me.</h3>
       </div>
     </div>

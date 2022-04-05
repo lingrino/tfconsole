@@ -41,16 +41,21 @@ function getLines() {
 
 // populate the command history from local storage
 function fillHistory() {
-    let html
+    current = document.getElementById("history")
+
+    incoming = document.createElement("div")
+    incoming.id = "history"
+    incoming.class = "history"
+
     for (const line of getLines()) {
-        html += "<div id=\""+line[0]+"\" class=\"line\">> "+line[1]+"</br>"+line[2]+"</br></div>"
+        element = document.createElement("div")
+        element.id = line[0]
+        element.classList.add("line")
+        element.textContent = `> ${line[1]}\r\n${line[2]}`
+        incoming.appendChild(element)
     }
 
-    const escapeHTMLPolicy = trustedTypes.createPolicy("myEscapePolicy", {
-        createHTML: (string) => string // TODO actually filter the lines
-    });
-
-    document.getElementById("history").innerHTML = escapeHTMLPolicy.createHTML(html)
+    current.replaceWith(incoming)
 }
 
 // things to do before the form is submitted
@@ -65,7 +70,7 @@ function setID() {
 }
 
 // clear all command history from local storage
-document.getElementById("clearHistory").onclick = clearHistory
+document.getElementById("clear").onclick = clearHistory
 function clearHistory() {
     localStorage.removeItem(historyKey)
     fillHistory()

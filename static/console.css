@@ -6,8 +6,6 @@ body {
 .main {
   margin: auto;
   width: 50%;
-  /* border: 3px solid green; */
-  /* padding: 10px; */
 }
 
 .title {
@@ -18,10 +16,18 @@ body {
   border: 3px solid white;
 }
 
+.hidden {
+  display: none;
+}
+
 .console {
   margin-top: 50px;
   width: 100%;
   border: 3px solid white;
+}
+
+.line {
+  white-space: pre;
 }
 
 .forminput {
